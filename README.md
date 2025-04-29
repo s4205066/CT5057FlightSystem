@@ -1,4 +1,4 @@
-Open with Main.py.
+Open with 'Main.py'.
 
 
 This will open the main GUI.
