@@ -1,3 +1,6 @@
+Open with main.py
+
+----------------------------------------------------------------
 The requirements for the assessment 
 
 The primary goal of this assignment is to grasp the design and functionality of fundamental searching, sorting, and traversing algorithms (LO1). It involves comprehending various methodologies for assessing the efficiency of algorithms (LO2) and comparing them based on their performance metrics, including both time and space considerations (LO3).
