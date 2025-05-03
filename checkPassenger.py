@@ -7,8 +7,9 @@ import customWindows
 
 
 
-def OpenPassInfoWin(ticketdf, waitlistdf):
-    window = tk.Tk()
+def OpenPassInfoWin():
+    window = tk.Toplevel()
+    window.geometry("300x300")
     window.title = "Check Passenger"
 
     passNameLabel = tk.Label(window, text="Passenger Name:")
@@ -16,12 +17,16 @@ def OpenPassInfoWin(ticketdf, waitlistdf):
     passNameEntry = tk.Entry(window)
     passNameEntry.pack()
 
-    checkInfoButton = tk.Button(window, text="Check Info", command=lambda: CheckPassInfo(ticketdf=ticketdf, waitlistdf=waitlistdf, passname=passNameEntry.get()))
+    checkInfoButton = tk.Button(window, text="Check Info", command=lambda: CheckPassInfo(passname=passNameEntry.get()))
     checkInfoButton.pack()
 
     window.mainloop()
 
-def CheckPassInfo(ticketdf, waitlistdf, passname):
+def CheckPassInfo(passname):
+    ticketdf = pd.read_csv("tickets.csv")
+    waitlistdf = pd.read_csv("waitlist.csv")
+
+    
     #check in ticketdf
     foundTickets = ticketdf.loc[(ticketdf['Name'] == str(passname))]
     print("FoundTickets =")

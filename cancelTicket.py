@@ -8,7 +8,9 @@ from tkinter import messagebox
 # to schedule that passenger for the available seat
 
 def openCancelWindow():
-    window = tk.Tk()
+    window = tk.Toplevel()
+    window.geometry("300x300")
+    window.title("Cancel Ticket")
 
     flightNumberLabel = tk.Label(window, text="Flight Number: ")
     flightNumberLabel.pack()
@@ -22,13 +24,13 @@ def openCancelWindow():
     passNameEntry = tk.Entry(window)
     passNameEntry.pack()
 
-    cancelTicketButton = tk.Button(window, text="Cancel Ticket")
+    cancelTicketButton = tk.Button(window, text="Cancel Ticket", command=lambda:CancelTicket(flightNum=int(flightNumberEntry.get()), passName=passNameEntry.get()))
     cancelTicketButton.pack()
 
 def CancelTicket(flightNum, passName):
-    ticketsdf = pd.read_csv("flights.csv")
+    ticketsdf = pd.read_csv("tickets.csv")
 
-    correctFlight = ticketsdf.loc[(ticketsdf["Flight_Number"] == str(flightNum))]
+    correctFlight = ticketsdf.loc[(ticketsdf["Flight_Number"] == flightNum)]
 
     correctName = correctFlight.loc[(correctFlight["Name"] == str(passName))]
 
@@ -40,7 +42,10 @@ def CancelTicket(flightNum, passName):
     else:
         #confirm
         askBox = messagebox.askokcancel(title="Confirm", message=f"Confirm cancellation of {passName} for flight {flightNum}")
-        if (askBox == messagebox.OK):
+        if (askBox == True):
             #actualltyCancelTicket
-            ticketsdf.drop(correctName, inplace=True)
+
+            ticketsdf.drop(index=correctName['index'], axis=0, inplace=True)
             ticketsdf.to_csv("tickets.csv",index=False)
+            
+        return

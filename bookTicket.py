@@ -11,9 +11,9 @@ import waitlist
 #Each flight has 10 first class, 40 business class, and 120 economy class seats.
 
 def OpenBookingWindow():
-    fliNumWindow = tk.Tk()
-    fliNumWindow.title = "Booking"
-    fliNumWindow.geometry("200x200")
+    fliNumWindow = tk.Toplevel()
+    fliNumWindow.title("Booking")
+    fliNumWindow.geometry("300x300")
 
     fliNumLabel = tk.Label(fliNumWindow, text="Flight Number: ")
     fliNumLabel.pack()
@@ -30,8 +30,12 @@ def SearchFlight(flightNumber):
     flightdf = pd.read_csv("flights.csv")
     if ((flightdf.loc[flightdf['index']] == flightNumber).shape[0] > 0):
         #Flight with that number has been found
-        customerWindow = tk.Tk()
+        customerWindow = tk.Toplevel()
+        customerWindow.geometry("300x300")
         customerWindow.title="Book Ticket"
+
+        fliNumLabel = tk.Label(customerWindow, text="Flight Number: " + str(flightNumber))
+        fliNumLabel.pack()
 
         nameLabel = tk.Label(customerWindow, text="Customer Name:")
         nameLabel.pack()
@@ -79,11 +83,10 @@ def BookPassenger(flightnumber, ticketclass, name):
 
         if (waitlistBox == messagebox.YES):
             waitlist.AddToWaitlist(flightnumber, ticketclass, name)
+            return
         elif (waitlistBox == messagebox.NO):
             return
-
-
-
+    
     newTicket = pd.DataFrame([{'index': nextIndex, 'Flight_Number': flightnumber, 'Seat_Number': seatNumber, 'Class': ticketclass, 'Name': str(name)}], columns=['index','Flight_Number','Seat_Number','Class','Name'])
     
     #print(ticketdf)

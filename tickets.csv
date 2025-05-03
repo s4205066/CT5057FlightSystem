@@ -1,9 +1,7 @@
 index,Flight_Number,Seat_Number,Name,Class
 0,0,1,pass1,First
-1,0,2,pass2,First
 2,0,3,pass3,First
 3,0,4,pass4,First
-4,0,5,pass5,First
 5,0,6,6,First
 6,0,7,7,First
 7,0,8,8,First
@@ -20,3 +18,15 @@ index,Flight_Number,Seat_Number,Name,Class
 18,0,0,24t6dsf,Business
 19,0,0,asdev,First
 20,0,0,dhfd,Business
+21,1,1,3ehetrh,First
+22,2,51,wrg,Economy
+23,7,1,pass1,First
+24,7,2,pass2,First
+25,7,3,pass3,First
+26,7,4,pass4,First
+27,7,5,pass5,First
+28,7,6,pass6,First
+29,7,7,pass7,First
+30,7,8,pass8,First
+31,7,9,pass9,First
+32,7,10,pass10,First

@@ -3,7 +3,7 @@ import tkinter as tk
 from pandastable import Table, TableModel
 
 def openExplorerWindow(_df, windowTitle="Dataframe"):
-    window = tk.Tk()
+    window = tk.Toplevel()
     window.title(windowTitle)
     
     frame = tk.Frame(window)
@@ -14,9 +14,40 @@ def openExplorerWindow(_df, windowTitle="Dataframe"):
     
     window.mainloop()
 
+def dispFlightPassInfo(flight, passengersDF):
+    window = tk.Toplevel()
+
+    window.title("Flight " + str(flight["index"]) + " Details")
+    
+    depPort = flight["Source"]
+    depDate = flight["Date_of_Journey"] 
+    depTime = flight["Dep_Time"]
+    arrPort = flight["Destination"]
+
+    depPortLabel = tk.Label(window, text="Departure Port: " + str(depPort))
+    depPortLabel.pack()
+    depDateLabel = tk.Label(window, text="Date: " + str(depDate))
+    depDateLabel.pack()
+    depTimeLabel = tk.Label(window, text="Time: " + str(depTime))
+    depTimeLabel.pack()
+    arrPortLabel = tk.Label(window, text="Arrival Port: " + str(arrPort))
+    arrPortLabel.pack()
+
+    passLabel = tk.Label(window, text="Passengers:")
+    passLabel.pack()
+
+    frame = tk.Frame(window)
+    frame.pack()
+    
+    passtbl = Table(frame, dataframe=passengersDF, showtoolbar=True, showstatusbar=True)
+    passtbl.show()
+
+    window.mainloop()
+
 def dispWaitlistInfo(waitlistrow):
-    window = tk.Tk()
-    window.title("Waitlist Operation")
+    window = tk.Toplevel()
+    window.geometry("300x300")
+    window.title("Waitlist Passenger")
 
     passnameLabel = tk.Label(window, text="Passenger Name: " + str(waitlistrow['Name'].to_numpy()[0]))
     passnameLabel.pack()
@@ -33,8 +64,9 @@ def dispWaitlistInfo(waitlistrow):
     window.mainloop()
 
 def dispTicketInfo(ticketrow):
-    window = tk.Tk()
-    window.title("Waitlist Operation")
+    window = tk.Toplevel()
+    window.geometry("300x300")
+    window.title("Passenger Ticket")
 
     passnameLabel = tk.Label(window, text="Passenger Name: " + str(ticketrow['Name'].to_numpy()[0]))
     passnameLabel.pack()

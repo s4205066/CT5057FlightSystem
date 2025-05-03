@@ -4,7 +4,7 @@ import pandas as pd
 import customWindows
 
 def openWaitlistWindow():
-    waitlistWindow = tk.Tk()
+    waitlistWindow = tk.Toplevel()
     
     entryLabel = tk.Label(waitlistWindow, text="Flight Number: ")
     entryLabel.pack()
@@ -20,9 +20,9 @@ def openWaitlistWindow():
 
 def AddToWaitlist(flinum, ticclass, name):
     waitlistdf = pd.read_csv('waitlist.csv')
-    dfrows = waitlistdf.shape[0]
     #newwaitlistID = waitlistdf.iloc[dfrows]['index']
-    waitlistdf[dfrows] = [dfrows, flinum, ticclass, name]
+    newRow = pd.DataFrame({"index": [len(waitlistdf)], "Flight_Number": [flinum], "Class": [ticclass], "Name": [name]})
+    waitlistdf = pd.concat([waitlistdf, newRow], ignore_index=False)
 
     try:
         waitlistdf.to_csv('waitlist.csv', index=False)
@@ -30,7 +30,6 @@ def AddToWaitlist(flinum, ticclass, name):
         messagebox.showinfo(title="Waitlist Operation", message=successmsg)
     except:
         messagebox.showerror(title="Waitlist Error", message="Error!")
-
     return
 
 
@@ -54,7 +53,7 @@ def RemoveFromWaitlist(flinum, name):
     # WaitlistID is required
     else:
         messagebox.showwarning(title="Operation Interruption", message=f"More than 1 ticket for {name} for flight {flinum}\n Confirm WaitlistID")
-        selectWindow = tk.Tk()
+        selectWindow = tk.Toplevel()
 
         waitIDLabel = tk.Label(selectWindow, text="WaitlistID:")
         waitIDLabel.pack()

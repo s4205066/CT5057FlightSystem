@@ -11,16 +11,17 @@ def main():
     bookPassButton = tk.Button(mainWindow, text="Book Passenger", command=lambda: bookTicket.OpenBookingWindow())
     bookPassButton.pack()
 
-    checkPassButton = tk.Button(mainWindow, text="Check Passenger", command=lambda: checkPassenger.OpenPassInfoWin(pd.read_csv("tickets.csv")))
+    checkPassButton = tk.Button(mainWindow, text="Check Passenger", command=lambda: checkPassenger.OpenPassInfoWin())
     checkPassButton.pack()
 
-    checkFlightButton = tk.Button(mainWindow, text="Check Flight", command=lambda: checkFlight.OpenFlightInfoWin(pd.read_csv("flights.csv"), pd.read_csv("tickets.csv")))
+    checkFlightButton = tk.Button(mainWindow, text="Check Flight", command=lambda: checkFlight.OpenFlightInfoWin())
     checkFlightButton.pack()
 
     waitlistButton = tk.Button(mainWindow, text="Waitlist Functions", command=lambda: waitlist.openWaitlistWindow())
     waitlistButton.pack()
 
     cancelTicketButton = tk.Button(mainWindow, text="Cancel Ticket", command=lambda:cancelTicket.openCancelWindow())
+    cancelTicketButton.pack()
 
     mainWindow.mainloop()
 
