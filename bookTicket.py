@@ -27,12 +27,13 @@ def OpenBookingWindow():
 
 
 def SearchFlight(flightNumber):
+    #Gets flight information, given the flightNumber
     flightdf = pd.read_csv("flights.csv")
     if ((flightdf.loc[flightdf['index']] == flightNumber).shape[0] > 0):
         #Flight with that number has been found
         customerWindow = tk.Toplevel()
         customerWindow.geometry("300x300")
-        customerWindow.title="Book Ticket"
+        customerWindow.title("Book Ticket")
 
         fliNumLabel = tk.Label(customerWindow, text="Flight Number: " + str(flightNumber))
         fliNumLabel.pack()
@@ -47,6 +48,7 @@ def SearchFlight(flightNumber):
 
         ticketClass = tk.StringVar()
 
+        #Updates when a first/business/economy class button is pressed
         def update(value):
             selection = "Ticket Class: " + value
             classLabel.config(text = selection)
@@ -65,11 +67,9 @@ def SearchFlight(flightNumber):
         customerWindow.mainloop()
 
     else:
+        #Shows when flightnumber is invalid
         messagebox.showerror(title="Booking Error", message=f"Unable to find flight: {flightNumber}")
     
-
-#tickets columns = index,Flight_Number,Seat_Number,Class,Name
-
 def BookPassenger(flightnumber, ticketclass, name):
     ticketdf = pd.read_csv('tickets.csv')
     nextIndex = ticketdf.shape[0]
@@ -78,7 +78,7 @@ def BookPassenger(flightnumber, ticketclass, name):
 
     if (seatNumber == -1):
         #Couldn't find a seat for class on flight
-        #offer waitlist
+        #offer to place the passenger on waitlist
         waitlistBox = messagebox.askquestion("No Seat Found", f"No {ticketclass} class seat found for flight {flightnumber}. Add to waitlist?")
 
         if (waitlistBox == messagebox.YES):
@@ -88,18 +88,14 @@ def BookPassenger(flightnumber, ticketclass, name):
             return
     
     newTicket = pd.DataFrame([{'index': nextIndex, 'Flight_Number': flightnumber, 'Seat_Number': seatNumber, 'Class': ticketclass, 'Name': str(name)}], columns=['index','Flight_Number','Seat_Number','Class','Name'])
-    
-    #print(ticketdf)
     ticketdf = pd.concat([ticketdf, newTicket], ignore_index=True)
-    #ticketdf.drop(ticketdf.columns[0], axis=1, inplace=True)
-    #ticketdf.columns = ['index','Flight_Number','Seat_Number','Class','Name']
-    #print(ticketdf)
 
     try:
         ticketdf.to_csv('tickets.csv', index=False)
         successmsg = f"Passenger {name} is booked for a(n) {ticketclass} ticket for flight {flightnumber}"
         messagebox.showinfo(title="Waitlist Operation", message=successmsg)
     except:
+        #Error catching
         messagebox.showerror(title="Waitlist Error", message="Error!")
 
     return

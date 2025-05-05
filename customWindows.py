@@ -2,9 +2,11 @@ import pandas as pd
 import tkinter as tk
 from pandastable import Table, TableModel
 
+#Used to display information straight from a pandas.DataFrame
 def openExplorerWindow(_df, windowTitle="Dataframe"):
     window = tk.Toplevel()
     window.title(windowTitle)
+    window.geometry("300x300")
     
     frame = tk.Frame(window)
     frame.pack()
@@ -14,15 +16,18 @@ def openExplorerWindow(_df, windowTitle="Dataframe"):
     
     window.mainloop()
 
+#displays a window with flight info (Departure, Arrival, Time, Date) and all passengers with a ticket for flight (openExplorerWindow)
 def dispFlightPassInfo(flight, passengersDF):
     window = tk.Toplevel()
+    window.title("Flight Information")
+    window.geometry("500x300")
 
     window.title("Flight " + str(flight["index"]) + " Details")
     
-    depPort = flight["Source"]
-    depDate = flight["Date_of_Journey"] 
-    depTime = flight["Dep_Time"]
-    arrPort = flight["Destination"]
+    depPort = flight["Source"].values[0] 
+    depDate = flight["Date_of_Journey"].values[0] 
+    depTime = flight["Dep_Time"].values[0] 
+    arrPort = flight["Destination"].values[0] 
 
     depPortLabel = tk.Label(window, text="Departure Port: " + str(depPort))
     depPortLabel.pack()
@@ -44,6 +49,7 @@ def dispFlightPassInfo(flight, passengersDF):
 
     window.mainloop()
 
+#Displays information when CheckPassenger finds a waitlist entry
 def dispWaitlistInfo(waitlistrow):
     window = tk.Toplevel()
     window.geometry("300x300")
@@ -63,6 +69,7 @@ def dispWaitlistInfo(waitlistrow):
 
     window.mainloop()
 
+#Displays information when CheckPassenger finds a ticket entry
 def dispTicketInfo(ticketrow):
     window = tk.Toplevel()
     window.geometry("300x300")

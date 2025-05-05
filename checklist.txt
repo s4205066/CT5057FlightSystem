@@ -1,27 +1,27 @@
 #Aesthetics
--Titles for each window
--Adequate window sizing
+-Titles for each window ✅
+-Window Sizes ✅
+-comments
 
 
 #Assessment requirements
 - Schedule a passenger for a flight:
---Choose a flight number. ✅ 
---Choose a class. ✅ 
+--Choose a flight number. Choose a class. ✅ 
 --If all the seats are full, give the option to put the passenger on a wait list. There should be a wait list for every class (first, business, and economy). ✅
 
 - Cancel a passenger from a flight: 
---Choose a passenger. Choose a flight. Cancel Ticket. ✅
---If there are passengers on the wait list, print the name of the next passenger and give the option to schedule that passenger for the available seat.
+--Choose a passenger. Choose a flight. ✅ (Cancels ticket)
+--If there are passengers on the wait list, print the name of the next passenger and give the option to schedule that passenger for the available seat. ✅
 
 - Passenger status: print the status of a passenger; 
 --Choose a passenger. If the passenger is scheduled for a flight, print the flight information. (passenger info ✅), (flight info ❌ (can be found with other function (checkFlight/getFlightDetails())))
--- If the passenger is on a wait list, print the flight information and the passenger's position on the wait list. (passenger info ✅), (flight info ❌ (can be found with other function (checkFlight/getFlightDetails())))
+-- If the passenger is on a wait list, print the flight information and the passenger's position on the wait list. (passenger info/waitlist operation ✅), (flight info ❌ (can be found with other function (checkFlight/getFlightDetails())))
 
 - Flight information: print the information for a flight; 
 --Print the departure airport, the departure date, the arrival airport, ✅
 --And a list of all the seats and the name of the passenger in each seat. ✅
 
-- at least one of the data structures (queues/graphs/trees) proposed in lectures ❌
+- at least one of the data structures (queues/graphs/trees) proposed in lectures 
 - at least one of the sorting algorithms studied during the lectures ✅ (specialFunctions/bubbleSort())
 - at least one of the searching algorithms studied during the lectures ✅ (specialFunctions/binarySearchDF())
 

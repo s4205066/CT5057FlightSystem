@@ -10,7 +10,7 @@ import customWindows
 def OpenPassInfoWin():
     window = tk.Toplevel()
     window.geometry("300x300")
-    window.title = "Check Passenger"
+    window.title("Check Passenger")
 
     passNameLabel = tk.Label(window, text="Passenger Name:")
     passNameLabel.pack()
@@ -27,20 +27,25 @@ def CheckPassInfo(passname):
     waitlistdf = pd.read_csv("waitlist.csv")
 
     
-    #check in ticketdf
+    #Get all tickets with name {passname}
     foundTickets = ticketdf.loc[(ticketdf['Name'] == str(passname))]
     print("FoundTickets =")
     print(foundTickets)
 
     if (foundTickets.shape[0] == 1):
-        #pasenger found in ticketsdf
+        #1 passenger with name {passname} has a ticket
         customWindows.dispTicketInfo(foundTickets)
         return
     elif(foundTickets.shape[0] > 1):
+        #Multiple passengers with name {passname} has a ticket
+        #Opens window with all passengers found with passName
         print("Duplicate passengers found in tickets")
         customWindows.openExplorerWindow(foundTickets, windowTitle="Tickets")
         return
     
+
+    #If code runs to here, passenger with {passName} is NOT in ticketsdf
+    #Look for passenger in the waitlist
     waitlistPass = waitlistdf.loc[(waitlistdf['Name'] == str(passname))]
     print("waitlistPass =")
     print(waitlistPass)

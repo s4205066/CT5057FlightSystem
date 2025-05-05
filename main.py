@@ -6,7 +6,7 @@ import bookTicket, checkPassenger, checkFlight, waitlist, cancelTicket
 def main():
     mainWindow = tk.Tk()
     mainWindow.title("Main Menu")
-    mainWindow.geometry("320x480")
+    mainWindow.geometry("300x300")
 
     bookPassButton = tk.Button(mainWindow, text="Book Passenger", command=lambda: bookTicket.OpenBookingWindow())
     bookPassButton.pack()
@@ -24,6 +24,7 @@ def main():
     cancelTicketButton.pack()
 
     mainWindow.mainloop()
+
 
 
 if __name__ == "__main__":
