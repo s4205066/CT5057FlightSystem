@@ -1,4 +1,5 @@
-Open with main.py
+Open with command prompt:
+python main.py
 
 ----------------------------------------------------------------
 The requirements for the assessment 
